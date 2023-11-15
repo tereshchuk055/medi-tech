@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
-    'core',
     'authentication',
 ]
 
@@ -105,7 +104,7 @@ DATABASES = {
 }
 
 # User model
-AUTH_USER_MODEL = 'core.AppUser'
+AUTH_USER_MODEL = 'authentication.AppUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (

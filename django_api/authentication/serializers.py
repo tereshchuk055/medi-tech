@@ -1,4 +1,4 @@
-from core.models import AppUser
+from authentication.models import AppUser
 from rest_framework import fields, serializers
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.password_validation import validate_password
@@ -14,24 +14,44 @@ from rest_framework_simplejwt.tokens import RefreshToken
 UserModel = get_user_model()
 
 
-class UserRegisterSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField()
-    password = serializers.CharField(write_only=True, validators=[
-                                     MinLengthValidator(limit_value=8)])
+class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ['email', 'first_name', 'last_name',
-                  'user_birthdate', 'user_sex', 'user_phone',
-                  'password', 'date_joined', 'is_active']
+        fields = ['email', 'first_name', 'last_name', 'user_birthdate',
+                  'user_sex', 'user_phone', 'password', 'date_joined', 'is_active']
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'is_active': {'write_only': True}
+        }
 
     def validate_email(self, value):
-        custom_validation({'email': value})
+        exclude_user_id = getattr(self.instance, 'id', None)
+        custom_validation({'email': value, 'exclude_user_id': exclude_user_id})
+        return value
+
+    def validate_password(self, value):
+        try:
+            validate_password(value, self.initial_data)
+        except ValidationError as e:
+            raise serializers.ValidationError({'password': e.messages})
         return value
 
     def create(self, validated_data):
         user = UserModel.objects._create_user(**validated_data)
         return user
+
+    def update(self, instance, validated_data):
+        for field, value in validated_data.items():
+            setattr(instance, field, value)
+
+        password = validated_data.get('password')
+        if password:
+            self.validate_password(password)
+            instance.set_password(password)
+
+        instance.save()
+        return instance
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -58,12 +78,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
         refresh = self.get_token(self.user)
-        
+
         data.pop('refresh', None)
         data["access"] = str(refresh.access_token)
 
         self.user.refresh_token = refresh
         self.user.save()
-        
+
         return data
-        
