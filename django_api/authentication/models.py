@@ -18,12 +18,9 @@ class AppUserManager(BaseUserManager):
 
     def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_stuff', True)
+        extra_fields.setdefault('permissions_level', 15)
         return self._create_user(email, password, **extra_fields)
 
-    def create_stuff(self, email, password, **extra_fields):
-        extra_fields.setdefault('is_stuff', True)
-        return self._create_user(email, password, **extra_fields)
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
@@ -37,7 +34,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     last_login = models.DateTimeField(null=True, blank=True)
     is_active = models.BooleanField(_('active'), default=True)
-    is_stuff = models.BooleanField(_('stuff'), default=False)
+    permissions_level = models.IntegerField(_('permissions'), default=0)
     is_superuser = models.BooleanField(_('superuser'), default=False)
     refresh_token = models.TextField(
         _('refresh token'), default="", null=False)

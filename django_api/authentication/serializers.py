@@ -71,6 +71,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['user_phone'] = user.user_phone
         dt_joined_str = user.date_joined.strftime("%Y-%m-%d %H:%M:%S")
         token['date_joined'] = dt_joined_str
+        token['permissions_level'] = user.permissions_level
         refresh = RefreshToken.for_user(user)
         refresh_token = str(refresh)
         return token
