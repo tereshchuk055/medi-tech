@@ -7,28 +7,13 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.core.serializers import serialize
-import json
-import jwt
+from .utils import *
 from django.conf import settings
 from django.shortcuts import get_object_or_404
-from enum import Enum
-
-
-class Permission(Enum):
-    READ = 0b0001
-    ADD = 0b0010
-    EDIT = 0b0100
-    DELETE = 0b1000
 
 
 class UserView(APIView):
     permission_classes = [IsAuthenticated]
-
-    def decode_user(self, token):
-        decoded_data = jwt.decode(jwt=token,
-                                  key=settings.SECRET_KEY,
-                                  algorithms=["HS256"])
-        return decoded_data
 
     def get_access_level(self, permission_level, permission_type):
         return (permission_level & permission_type.value) > 0
@@ -62,7 +47,7 @@ class UserView(APIView):
         user_id = request.data.get('id')
 
         try:
-            user_data_from_token = self.decode_user(
+            user_data_from_token = decode_user(
                 request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1])
         except ValidationError as e:
             raise serializers.ValidationError({'token': user_info})
@@ -88,7 +73,7 @@ class UserView(APIView):
         user_id = request.data.get('id')
 
         try:
-            user_data_from_token = self.decode_user(
+            user_data_from_token = decode_user(
                 request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1])
         except ValidationError as e:
             raise serializers.ValidationError({'token': user_info})
@@ -119,7 +104,7 @@ class UserView(APIView):
         user_id = request.data.get('id')
 
         try:
-            user_data_from_token = self.decode_user(
+            user_data_from_token = decode_user(
                 request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1])
         except ValidationError as e:
             raise serializers.ValidationError({'token': user_info})
