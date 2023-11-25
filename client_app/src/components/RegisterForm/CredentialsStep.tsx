@@ -8,7 +8,7 @@ export default function CredentialsStep({ register, errors }: FormStepType) {
     return (<>
 
         <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-medium mb-2">
+            <label className="block text-gray-700 text-sm font-medium mb-2 dark:text-gray-100">
                 Email
             </label>
             <TextInput
@@ -17,7 +17,7 @@ export default function CredentialsStep({ register, errors }: FormStepType) {
         </div>
 
         <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-medium mb-2">
+            <label className="block text-gray-700 text-sm font-medium mb-2 dark:text-gray-100">
                 Password
             </label>
             <PasswordInput
@@ -26,7 +26,7 @@ export default function CredentialsStep({ register, errors }: FormStepType) {
             <ShowErrorMessage error={errors?.password?.message} />
         </div>
         <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-medium mb-2">
+            <label className="block text-gray-700 text-sm font-medium mb-2 dark:text-gray-100">
                 Repeat password
             </label>
             <PasswordInput

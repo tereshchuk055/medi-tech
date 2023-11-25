@@ -8,7 +8,7 @@ type SexRadioButtonType = {
 export default function SexRadioButton({ register }: SexRadioButtonType) {
   return (
     <>
-      <label className="block text-gray-700 text-sm font-medium mb-2">Sex</label>
+      <label className="block text-gray-700 text-sm font-medium mb-2 dark:text-gray-100">Sex</label>
       <RadioButton
         register={register}
         text={UserSex[0]}
