@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 type PasswordInputType = {
-    name: string,
-    value: string,
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    register?: any;
+    name?: string,
+    value?: string,
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 

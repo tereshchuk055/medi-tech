@@ -24,8 +24,6 @@ export default function LoginForm() {
     }
     const handleButtonClick = () => {
         console.log(formInputs);
-        console.log("___")
-        console.log({ ...formInputs, ["login"]: "bob" });
     }
 
     return (
