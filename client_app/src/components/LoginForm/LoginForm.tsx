@@ -1,33 +1,37 @@
-import { useState } from "react";
 import TextInput from "../TextInput/TextInput";
 import PasswordInput from "../PasswordInput/PasswordInput";
 import AuthorizationButton from "./AuthorizationButton";
 import Checkbox from "../Checkbox/Checkbox";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import ShowErrorMessage from "../ShowErrorMessage/ShowErrorMessage";
+import { useEffect } from "react";
 
 interface FormInputs {
     login: string,
     password: string
 }
 
-const defaultValues: FormInputs = {
-    login: "",
-    password: ""
-}
+const schema = yup.object().shape({
+    login: yup.string().required("Login required"),
+    password: yup.string().required('Password required')
+});
+
 
 export default function LoginForm() {
-    const [formInputs, setFormInputs] = useState<FormInputs>(defaultValues);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormInputs>({ resolver: yupResolver(schema) });
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { value, name } = event.target;
-
-        setFormInputs({ ...formInputs, [name]: value });
-    }
-    const handleButtonClick = () => {
-        console.log(formInputs);
-    }
+    const onSubmit = (data: FormInputs) => {
+        console.log(data);
+    };
 
     return (
-        <form action="">
+        <form onSubmit={handleSubmit(onSubmit)}>
             <div className="relative font-medium md:h-screen flex items-center content-center">
                 <div className="mr-auto ml-auto w-full">
                     <div className="w-full max-w-md mr-auto ml-auto mt-4 mb-1 text-center">
@@ -35,19 +39,25 @@ export default function LoginForm() {
                     </div>
                     <div className="w-full max-w-md mr-auto ml-auto mt-4">
                         <div className="bg-white shadow-lg rounded-md px-8 py-8 mb-4 ml-auto mr-auto">
-                            <div className="mb-4">
+                            <div className=" mb-6  h-20">
                                 <label className="block text-gray-700 text-sm font-medium mb-2" > Login </label>
-                                <TextInput name="login" value={formInputs.login} onChange={handleInputChange} />
+                                <TextInput
+                                    register={register("login")}
+                                />
+                                {errors.login && <ShowErrorMessage error={errors.login.message} />}
                             </div>
-                            <div className="mb-6">
+                            <div className="mb-6  h-20">
                                 <label className="block text-gray-700 text-sm font-medium mb-2"> Password </label>
-                                <PasswordInput name="password" value={formInputs.password} onChange={handleInputChange} />
+                                <PasswordInput
+                                    register={register("password")}
+                                />
+                                {errors.password && <ShowErrorMessage error={errors.password.message} />}
                             </div>
                             <div className="mb-6">
                                 <div className="grid sm:grid-cols-2 gap-4">
                                     <div className="text-center sm:text-left">
                                         <label>
-                                            <Checkbox name="remembering" onChange={handleInputChange} text="" />
+                                            <Checkbox name="remembering" text="" />
                                             <span className="text-sm font-medium text-gray-700 ">Remember me</span>
                                         </label>
                                     </div>
@@ -57,8 +67,8 @@ export default function LoginForm() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="mb-6">
-                                <AuthorizationButton onClick={handleButtonClick} />
+                            <div className="mb-2">
+                                <AuthorizationButton type="submit" />
                             </div>
                         </div>
                     </div>
