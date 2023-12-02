@@ -3,13 +3,15 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny 
 from .serializers import UserSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.core.serializers import serialize
 from .utils import *
 from django.conf import settings
 from django.shortcuts import get_object_or_404
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.decorators import api_view, permission_classes
 
 
 class UserView(APIView):
@@ -33,7 +35,7 @@ class UserView(APIView):
 
     def get_instance(self, user_id):
         return get_object_or_404(AppUser, pk=user_id)
-
+   
     def post(self, request):
         serializer = UserSerializer(data=request.data)
 
@@ -127,9 +129,9 @@ class UserView(APIView):
         return Response({"message": "User deleted successfully"}, status=status.HTTP_200_OK)
 
     def get_permissions(self):
-        if self.request.method == 'post':
+        if self.request.method == 'POST':
             return [AllowAny()]
-        return super().get_permissions()
+        return super().get_permissions() 
 
 
 class MyTokenObtainPairView(TokenObtainPairView, APIView):

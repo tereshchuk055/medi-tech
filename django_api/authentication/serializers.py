@@ -38,7 +38,7 @@ class UserSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        user = UserModel.objects._create_user(**validated_data)
+        user = UserModel.objects.create_user(**validated_data)
         return user
 
     def update(self, instance, validated_data):
@@ -72,6 +72,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         dt_joined_str = user.date_joined.strftime("%Y-%m-%d %H:%M:%S")
         token['date_joined'] = dt_joined_str
         token['permissions_level'] = user.permissions_level
+        token['is_superuser'] = user.is_superuser
         refresh = RefreshToken.for_user(user)
         refresh_token = str(refresh)
         return token

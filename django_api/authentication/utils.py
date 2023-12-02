@@ -13,7 +13,7 @@ class Permission(Enum):
 def decode_user(token):
     try:
         decoded_data = jwt.decode(
-            token, key=settings.SECRET_KEY, algorithms=["HS256"])   
+            token, key=settings.SECRET_KEY, algorithms=["HS256"])
         return decoded_data
     except jwt.ExpiredSignatureError:
         raise ValidationError({'token': 'Token has expired'})
