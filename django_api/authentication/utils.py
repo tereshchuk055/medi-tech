@@ -1,6 +1,7 @@
 import jwt
 from django.conf import settings
 from enum import Enum
+from rest_framework.exceptions import ValidationError
 
 
 class Permission(Enum):

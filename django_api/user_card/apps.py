@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class BackendApiConfig(AppConfig):
+class UserCardConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'authentication'
+    name = 'user_card'

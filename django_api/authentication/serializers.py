@@ -1,15 +1,10 @@
-from authentication.models import AppUser
-from rest_framework import fields, serializers
-from django.contrib.auth.hashers import make_password
+from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from .validations import custom_validation
-from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from django.core.validators import MinLengthValidator
 import datetime
-import json
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.tokens import RefreshToken
 
 UserModel = get_user_model()
 
@@ -19,7 +14,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ['email', 'first_name', 'last_name', 'user_birthdate',
-                  'user_sex', 'user_phone', 'password', 'date_joined', 'is_active']
+                  'user_sex', 'user_phone', 'password', 'date_joined',
+                  'is_active']
         extra_kwargs = {
             'password': {'write_only': True},
             'is_active': {'write_only': True}
@@ -73,8 +69,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['date_joined'] = dt_joined_str
         token['permissions_level'] = user.permissions_level
         token['is_superuser'] = user.is_superuser
-        refresh = RefreshToken.for_user(user)
-        refresh_token = str(refresh)
         return token
 
     def validate(self, attrs):

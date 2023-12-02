@@ -2,7 +2,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin
 
 
 class AppUserManager(BaseUserManager):
@@ -20,7 +20,6 @@ class AppUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('permissions_level', 15)
         return self._create_user(email, password, **extra_fields)
-
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
