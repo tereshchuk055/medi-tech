@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import cloudinary
 from pathlib import Path
 import datetime
 
@@ -182,6 +183,13 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console'],
-        'level': 'DEBUG',  
+        'level': 'DEBUG',
     },
 }
+
+
+cloudinary.config(
+    cloud_name="dykpkbc8o",
+    api_key="292814676545878",
+    api_secret="***************************"
+)
