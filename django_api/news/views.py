@@ -1,6 +1,7 @@
 from rest_framework.exceptions import ValidationError
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticated
+from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
 from .serializers import NewsSerializer
 from authentication.utils import decode_user
 from .models import AppNews
