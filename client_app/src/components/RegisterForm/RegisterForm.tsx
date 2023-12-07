@@ -31,6 +31,7 @@ export type CredentialsInputs = {
   email: string;
   password: string;
   repeatPassword: string;
+  verificationCode ?: string;
 };
 
 export type FormInputs = UserDataInputs | CredentialsInputs;
@@ -56,6 +57,10 @@ const schema: yup.ObjectSchema<UserDataInputs | CredentialsInputs>[] = [
       .string()
       .required("Repeat your password!")
       .oneOf([yup.ref("password")], "Passwords don't match"),
+    verificationCode: yup
+      .string()
+      .required("Enter your verification code!")
+      .min(10, "Verification code must be at least 10 characters long"),
   }),]
 
 export default function RegisterForm() {
