@@ -1,5 +1,5 @@
 type CheckboxType = {
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   text: string;
   name?: string;
 };

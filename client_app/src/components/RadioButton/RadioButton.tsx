@@ -8,7 +8,7 @@ export default function RadioButton({
   register, text, value
 }: RadioButtonType) {
   return (
-    <label className="text-dark-700 text-sm font-medium  pr-6  ">
+    <label className="text-dark-700 text-sm font-medium  pr-6  dark:text-gray-100">
       <input
         className="mr-2"
         type="radio"

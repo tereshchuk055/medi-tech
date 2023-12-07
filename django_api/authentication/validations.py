@@ -21,5 +21,5 @@ def custom_validation(data):
             raise ValidationError('Choose another email')
     else:
         if UserModel.objects.filter(email=email).exists():
-            raise ValidationError(f'Choose another email')
+            raise ValidationError('Choose another email')
     return data

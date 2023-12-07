@@ -1,6 +1,7 @@
 import jwt
 from django.conf import settings
 from enum import Enum
+from rest_framework.exceptions import ValidationError
 
 
 class Permission(Enum):
@@ -13,7 +14,7 @@ class Permission(Enum):
 def decode_user(token):
     try:
         decoded_data = jwt.decode(
-            token, key=settings.SECRET_KEY, algorithms=["HS256"])   
+            token, key=settings.SECRET_KEY, algorithms=["HS256"])
         return decoded_data
     except jwt.ExpiredSignatureError:
         raise ValidationError({'token': 'Token has expired'})

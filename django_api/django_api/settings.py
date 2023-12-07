@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import cloudinary
 from pathlib import Path
-import os
 import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-t(74$uf*898ymbc3*3=*yhcj!@l3zzj+&5p8_+*6%9d6yhn0gu'
+SECRET_KEY = 'django-insecure-t(74$uf*898ymbc3*3=*yhcj!@l3zzj+&5p8_+ \
+*6%9d6yhn0gu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'authentication',
     'news',
+    'user_card'
 ]
 
 MIDDLEWARE = [
@@ -118,16 +120,21 @@ REST_FRAMEWORK = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+            'django.contrib.auth.password_validation.\
+UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+            'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+            'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+            'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -158,9 +165,33 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=50),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
-    'TOKEN_OBTAIN_SERIALIZER': 'authentication.serializers.MyTokenObtainPairSerializer',
+    'TOKEN_OBTAIN_SERIALIZER':
+        'authentication.serializers.MyTokenObtainPairSerializer',
 
     "AUTH_HEADER_TYPES": ("Bearer",),
     "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,
 }
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
+
+
+cloudinary.config(
+    cloud_name="dykpkbc8o",
+    api_key="292814676545878",
+    api_secret="AP1DIZj8NxCe2AlE_woK5F58-oY",
+    secure=True
+)

@@ -1,15 +1,10 @@
-from authentication.models import AppUser
-from rest_framework import fields, serializers
-from django.contrib.auth.hashers import make_password
+from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from .validations import custom_validation
-from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from django.core.validators import MinLengthValidator
 import datetime
-import json
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.tokens import RefreshToken
 
 UserModel = get_user_model()
 
@@ -19,10 +14,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ['email', 'first_name', 'last_name', 'user_birthdate',
-                  'user_sex', 'user_phone', 'password', 'date_joined', 'is_active']
+                  'user_sex', 'user_phone', 'password', 'date_joined',
+                  'is_active', 'is_stuff']
         extra_kwargs = {
             'password': {'write_only': True},
-            'is_active': {'write_only': True}
+            'is_active': {'write_only': True},
+            'is_stuff': {'write_only': True},
         }
 
     def validate_email(self, value):
@@ -38,7 +35,10 @@ class UserSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        user = UserModel.objects._create_user(**validated_data)
+        if not validated_data.pop('is_stuff', False):
+            user = UserModel.objects.create_user(**validated_data)
+        else:
+            user = UserModel.objects.create_stuff(**validated_data)
         return user
 
     def update(self, instance, validated_data):
@@ -72,8 +72,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         dt_joined_str = user.date_joined.strftime("%Y-%m-%d %H:%M:%S")
         token['date_joined'] = dt_joined_str
         token['permissions_level'] = user.permissions_level
-        refresh = RefreshToken.for_user(user)
-        refresh_token = str(refresh)
+        token['is_superuser'] = user.is_superuser
+        token['is_stuff'] = user.is_stuff
         return token
 
     def validate(self, attrs):

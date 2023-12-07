@@ -9,7 +9,7 @@ import ShowErrorMessage from "../ShowErrorMessage/ShowErrorMessage";
 
 interface FormInputs {
     disease: string,
-    dateApplication: string,
+    dateApplication: Date,
     condition: string,
     bloodPressure: string,
     referral: string,
@@ -20,11 +20,22 @@ interface FormInputs {
 const schema = yup.object().shape({
     disease: yup.string().required("Disease is a required field"),
     condition: yup.string().required("Condition is a required field"),
-    bloodPressure: yup.string().required("This is a required field"),
+    bloodPressure: yup
+        .string()
+        .test('isValidBloodPressure', 'Invalid blood pressure format', function (value) {
+            const { disease } = this.parent as FormInputs;
+
+            if (disease === 'hypertension' && value !== undefined && parseInt(value, 10) < 140) {
+                return false;
+            }
+
+            return value === undefined || /\d{2,3}\/\d{2,3}/.test(value);
+        })
+        .required('Blood pressure is required'),
     referral: yup.string().required("Referral is a required field"),
     medicine: yup.string().required("Medicine is a required field"),
     recommendations: yup.string().required("Recommendations is a required field"),
-    dateApplication: yup.string().required("This is a required field")
+    dateApplication: yup.date().required('Date is required field'),
 });
 
 
@@ -58,7 +69,7 @@ export default function TreatmentForm() {
                             <div className="ml-4 mb-2  h-20">
                                 <label className="block text-gray-700 text-sm font-medium mb-2"> Date of application </label>
                                 <DatePicker
-                                    value={new Date().toISOString().split("T")[0]}
+
                                     register={register("dateApplication")}
                                 />
                                 {errors.dateApplication && <ShowErrorMessage error={errors.dateApplication.message} />}

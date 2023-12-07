@@ -2,7 +2,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin
 
 
 class AppUserManager(BaseUserManager):
@@ -16,11 +16,15 @@ class AppUserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         return self._create_user(email, password, **extra_fields)
 
-    def create_superuser(self, email, password, **extra_fields):
-        extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('permissions_level', 15)
+    def create_stuff(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_stuff', True)
         return self._create_user(email, password, **extra_fields)
 
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_stuff', True)
+        extra_fields.setdefault('permissions_level', 15)
+        return self._create_user(email, password, **extra_fields)
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
@@ -36,6 +40,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_('active'), default=True)
     permissions_level = models.IntegerField(_('permissions'), default=0)
     is_superuser = models.BooleanField(_('superuser'), default=False)
+    is_stuff = models.BooleanField(_('stuff'), default=False)
     refresh_token = models.TextField(
         _('refresh token'), default="", null=False)
     username = None
