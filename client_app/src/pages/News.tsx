@@ -1,6 +1,5 @@
 
 import NewsCard from '../components/NewsCard/NewsCard';
-import styles from './page.module.css';
 import { useState } from 'react';
 
 
@@ -57,7 +56,7 @@ export default function News() {
 
     return (
         <>
-            <div className={styles.container}>
+            <div className="bg-gray-100 flex flex-wrap justify-between p-10 dark:bg-neutral-900">
                 {news.map(n =>
                     <NewsCard key={n.id} title={n.title} description={n.description} author={n.author} photoPath={n.photoPath} date={n.date} link={n.link} />
                 )}

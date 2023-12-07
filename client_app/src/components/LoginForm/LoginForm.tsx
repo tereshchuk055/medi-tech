@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import ShowErrorMessage from "../ShowErrorMessage/ShowErrorMessage";
-import Switcher from "../Switcher/Switcher";
 
 interface FormInputs {
     login: string,
@@ -32,7 +31,6 @@ export default function LoginForm() {
 
     return (
         <div className="pt-7 dark:bg-gray-900 ">
-            <Switcher />
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="relative font-medium md:h-screen flex items-center content-center">
                     <div className="mr-auto ml-auto w-full">
