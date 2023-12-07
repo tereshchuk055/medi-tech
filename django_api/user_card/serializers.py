@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from .models import AppDoctorCard
+from .models import AppDoctorCard, AppPatientCard
 import cloudinary.uploader
 from authentication.models import AppUser
 from authentication.serializers import UserSerializer
+
 
 
 class AppDoctorCardSerializer(serializers.ModelSerializer):
@@ -56,4 +57,43 @@ class AppDoctorCardSerializer(serializers.ModelSerializer):
                     {'photo': f"Error uploading image: {str(e)}"})
 
         instance.save()
+        return instance
+
+
+class AppPatientCardSerializer(serializers.ModelSerializer):
+    user = UserSerializer(source='user_id', read_only=True)
+
+    class Meta:
+        model = AppPatientCard
+        fields = '__all__'
+        extra_kwargs = {
+            'user_id': {'required': False}
+        }
+
+    def create(self, validated_data):
+        photo = validated_data.pop('photo', None)
+        instance = super().create(validated_data)
+
+        if photo:
+            upload_result = cloudinary.uploader.upload(photo)
+            instance.photo = upload_result['secure_url']
+            instance.save()
+
+        return instance
+
+    def update(self, instance, validated_data):
+        photo = validated_data.pop('photo', None)
+        user_id_to_change = validated_data.pop('user_id', None)
+        
+        instance = super().update(instance, validated_data)
+
+        if photo:
+            upload_result = cloudinary.uploader.upload(photo)
+            instance.photo = upload_result['secure_url']
+            instance.save()
+
+        if user_id_to_change is not None:
+            raise serializers.ValidationError({'error': 'Changing user_id is not allowed.'})
+
+        
         return instance
