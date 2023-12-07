@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'authentication',
     'news',
+    'user_card'
 ]
 
 MIDDLEWARE = [
@@ -120,8 +121,8 @@ REST_FRAMEWORK = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME':
-            'django.contrib.auth.password_validation. \
-                UserAttributeSimilarityValidator',
+            'django.contrib.auth.password_validation.\
+UserAttributeSimilarityValidator',
     },
     {
         'NAME':
@@ -191,5 +192,6 @@ LOGGING = {
 cloudinary.config(
     cloud_name="dykpkbc8o",
     api_key="292814676545878",
-    api_secret="***************************"
+    api_secret="AP1DIZj8NxCe2AlE_woK5F58-oY",
+    secure=True
 )

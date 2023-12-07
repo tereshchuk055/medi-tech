@@ -22,6 +22,7 @@ class AppUserManager(BaseUserManager):
 
     def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_stuff', True)
         extra_fields.setdefault('permissions_level', 15)
         return self._create_user(email, password, **extra_fields)
 

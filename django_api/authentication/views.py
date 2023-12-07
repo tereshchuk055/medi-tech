@@ -19,8 +19,7 @@ class UserView(APIView):
     def check_permission(self, user_data, permission_type):
         user_id = user_data['user_id']
         user_id_from_token = user_data['user_data_from_token']['user_id']
-        permission_level = user_data['user_data_from_token']
-        ['permissions_level']
+        permission_level = user_data['user_data_from_token']['permissions_level']
 
         permissions_level = self.get_access_level(
             permission_level, permission_type)
