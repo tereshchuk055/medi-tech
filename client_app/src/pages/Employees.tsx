@@ -1,9 +1,10 @@
 import Card from '../components/Cards/Card';
 import DoctorCard from '../components/Cards/DoctorCard';
 import { List } from 'react-virtualized';
-import { useTypedSelector } from '../hooks/storeHooks';
-import { useState } from 'react';
+import { useAppDispatch, useTypedSelector } from '../hooks/storeHooks';
+import { useEffect, useState } from 'react';
 import { User } from '../store/interfaces/entities';
+import { setEmployees } from '../store/slices/employees';
 
 // import { lazy, Suspense } from 'react';
 // import { createPortal } from "react-dom";
@@ -16,9 +17,21 @@ import { User } from '../store/interfaces/entities';
 
 export default function Employees() {
     // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const { employees } = useTypedSelector((state) => state.employees);
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data: User[] = (await import("./test.json")).default;
+                dispatch(setEmployees(data))
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    });
 
-    const [selected, setSelected] = useState<User | null>(employees[0])
+    const { employees } = useTypedSelector((state) => state.employees);
+    const [selected, setSelected] = useState<User | null>(employees[0]);
 
 
     const rowRenderer = ({ index, key, style }: any) => {
