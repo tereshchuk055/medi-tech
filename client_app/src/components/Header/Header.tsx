@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import Logo from '../Logo/Logo';
 import Switcher from '../Switcher/Switcher';
+import { useGlobalRefs } from '../Layout/RefContext';
 
 
 export default function Header() {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
-
+    const { headerRef } = useGlobalRefs();
     return (
-        <header className="dark:bg-neutral-900 pr-5  xl:border-b border-gray-200 border-opacity-75 border-gray-100 w-full ">
+        <header ref={headerRef} className="dark:bg-neutral-900 pr-5  xl:border-b border-gray-200 border-opacity-75 border-gray-100 w-full ">
             <nav>
                 <ul className="flex space-x-4 items-center">
                     <div className="container flex items-center justify-between p-2">
