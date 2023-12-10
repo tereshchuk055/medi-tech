@@ -1,4 +1,5 @@
 
+import { useGlobalRefs } from '../components/Layout/RefContext';
 import NewsCard from '../components/NewsCard/NewsCard';
 import { useState } from 'react';
 
@@ -51,6 +52,14 @@ const defaulNewstValues: News[] = [
 
 export default function News() {
 
+    const { headerRef } = useGlobalRefs();
+
+    const scrollToHeader = () => {
+        if (headerRef.current) {
+            headerRef.current.scrollIntoView({ behavior: 'smooth' }); 
+        }
+    };
+
     const [news] = useState<News[]>(defaulNewstValues);
 
 
@@ -60,6 +69,12 @@ export default function News() {
                 {news.map(n =>
                     <NewsCard key={n.id} title={n.title} description={n.description} author={n.author} photoPath={n.photoPath} date={n.date} link={n.link} />
                 )}
+                {news.map(n =>
+                    <NewsCard key={n.id} title={n.title} description={n.description} author={n.author} photoPath={n.photoPath} date={n.date} link={n.link} />
+                )} {/* тимчасово додано ще відображення новин для збільшення обсягу новин, щоб протестувати використання UseRef */}
+            </div>
+            <div onClick={scrollToHeader} >
+                До верху
             </div>
         </>
     )
