@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { news } from './slices/news'
+import { employees } from './slices/employees'
 
 const rootReducer = combineReducers({
-    news: news
+    news: news,
+    employees: employees
 })
 
 export const store = configureStore({

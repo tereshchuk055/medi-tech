@@ -1,92 +1,32 @@
 import Card from '../components/Cards/Card';
-import { List } from 'react-virtualized';
-import { useState } from 'react';
 import DoctorCard from '../components/Cards/DoctorCard';
-// import { useState, lazy, Suspense } from 'react';
+import { List } from 'react-virtualized';
+import { useTypedSelector } from '../hooks/storeHooks';
+import { useState } from 'react';
+import { User } from '../store/interfaces/entities';
+
+// import { lazy, Suspense } from 'react';
 // import { createPortal } from "react-dom";
 // import Button from '../components/Button/Button';
 
 
 // const Modal = lazy(() => import('../components/Modal/Modal'));
 
-interface User {
-    id: number;
-    firstName: string;
-    lastName: string;
-    age: number;
-    position: string
-    link: string;
-    degree: string,
-    address: string,
-    appointments: string,
-    workExperience: number,
-    phoneNumber: string,
-    about: string,
-}
-
-
-
-const defaultValues: User[] = [
-    {
-        id: 0,
-        firstName: 'Vlad',
-        lastName: 'Tereshchuk',
-        age: 25,
-        position: 'Терапевт',
-        link: 'https://img.freepik.com/free-photo/doctor-holding-clipboard-looking-at-camera_23-2148285743.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1698105600&semt=ais',
-        degree: 'MD',
-        address: '123 Main St, City',
-        appointments: 'Monday, Wednesday, Friday',
-        workExperience: 3,
-        phoneNumber: '+1234567890',
-        about: 'I am a passionate and dedicated therapist with a focus on holistic health.',
-    },
-    {
-        id: 1,
-        firstName: 'Vlad',
-        lastName: 'Tereshchuk',
-        age: 25,
-        position: 'Терапевт',
-        link: 'https://img.freepik.com/free-photo/doctor-holding-clipboard-looking-at-camera_23-2148285743.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1698105600&semt=ais',
-        degree: 'MD',
-        address: '123 Main St, City',
-        appointments: 'Monday, Wednesday, Friday',
-        workExperience: 3,
-        phoneNumber: '+1234567890',
-        about: 'I am a passionate and dedicated therapist with a focus on holistic health.',
-    },
-    {
-        id: 2,
-        firstName: 'Vlad',
-        lastName: 'Tereshchuk',
-        age: 25,
-        position: 'Терапевт',
-        link: 'https://img.freepik.com/free-photo/doctor-holding-clipboard-looking-at-camera_23-2148285743.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1698105600&semt=ais',
-        degree: 'MD',
-        address: '123 Main St, City',
-        appointments: 'Monday, Wednesday, Friday',
-        workExperience: 3,
-        phoneNumber: '+1234567890',
-        about: 'I am a passionate and dedicated therapist with a focus on holistic health.',
-    },
-
-]
-
-
 
 
 export default function Employees() {
     // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [users,] = useState<User[]>(defaultValues);
+    const { employees } = useTypedSelector((state) => state.employees);
+
+    const [selected, setSelected] = useState<User | null>(employees[0])
 
 
     const rowRenderer = ({ index, key, style }: any) => {
-        const user = users[index];
+        const user = employees[index];
         return (
-            <div key={key} style={style} className="space-y-4 " >
-                <Card position={user.position} age={user.age} firstName={user.firstName} lastName={user.lastName} />
+            <div key={key} style={style} className="space-y-4" onClick={() => { setSelected(user) }} >
+                <Card key={user.id} user={user} />
             </div>
-
         );
     };
 
@@ -109,41 +49,20 @@ export default function Employees() {
                             <List
                                 width={300}
                                 height={600}
-                                rowCount={users.length}
+                                rowCount={employees.length}
                                 rowHeight={100}
                                 rowRenderer={rowRenderer}
                             />
                         </div>
                         <div className="flex-grow bg-gray-100 dark:bg-neutral-900 overflow-y-hidden">
                             <div className="flex w-full items-center">
-
-
-                                <DoctorCard
-                                    key={defaultValues[0].id}
-                                    link={defaultValues[0].link}
-                                    firstName={defaultValues[0].firstName}
-                                    lastName={defaultValues[0].lastName}
-                                    position={defaultValues[0].position}
-                                    degree={defaultValues[0].degree}
-                                    address={defaultValues[0].address}
-                                    appointments={defaultValues[0].appointments}
-                                    workExperience={defaultValues[0].workExperience}
-                                    phoneNumber={defaultValues[0].phoneNumber}
-                                    about={defaultValues[0].about}
-                                />
-
-
+                                {selected && <DoctorCard user={selected} />}
                             </div>
                         </div>
                     </div>
-
                     {/* <Button onClick={() => setIsModalOpen(true)} text="Modal" /> */}
                 </div>
             </div>
-
-
-
-
         </>
     )
 }
