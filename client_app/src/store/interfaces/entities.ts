@@ -1,12 +1,6 @@
-interface User {
-    id: number,
-    firstName: string,
-    lastName: string,
-    email: string,
-    permission: number
-}
 
-interface News {
+
+export interface News {
     id: number,
     title: string,
     description: string,

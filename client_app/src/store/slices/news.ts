@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { News } from "../interfaces/entities";
 
 
 interface NewsSlice {
@@ -44,10 +45,18 @@ const newsSlice = createSlice({
     name: "news",
     initialState,
     reducers: {
-        
+        setNews: (state: NewsSlice, action: PayloadAction<News[]>) => {
+            state.data = action.payload;
+        },
+        addNew: (state: NewsSlice, action: PayloadAction<News>) => {
+            state.data = [...state.data, action.payload];
+        },
+        deleteNew: (state: NewsSlice, action: PayloadAction<News>) => {
+            state.data = state.data.filter(n => n != action.payload);
+        },
     }
 });
 
-export const {  } = newsSlice.actions
+export const { setNews, addNew, deleteNew } = newsSlice.actions
 
 export const news = newsSlice.reducer
