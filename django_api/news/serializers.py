@@ -6,7 +6,7 @@ class NewsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AppNews
-        fields = ['title', 'content', 'pub_date']
+        fields = ['id', 'title', 'content', 'pub_date']
 
     def update(self, instance, validated_data):
         for field, value in validated_data.items():

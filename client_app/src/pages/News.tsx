@@ -1,80 +1,43 @@
 
 import { useGlobalRefs } from '../components/Layout/RefContext';
 import NewsCard from '../components/NewsCard/NewsCard';
-import { useState } from 'react';
-
-
-
-interface News {
-    id: number;
-    title: string,
-    description: string,
-    author: string,
-    photoPath: string,
-    date: string,
-    link: string
-}
-
-const defaulNewstValues: News[] = [
-    {
-        id: 0, title: 'Lorem ipsum dolor sit amet consectetur', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam obcaecati ex natus nulla rem sequi laborum quod fugit',
-        author: 'William Halsted', photoPath: 'https://www.usaimmigrationapplication.org/wp-content/uploads/sites/8/medicine-usa.jpg',
-        date: 'Jan 29, 2018', link: "https://zaxid.net/meditsina_tag50837/"
-    },
-    {
-        id: 1, title: 'Lorem ipsum dolor sit amet, consectetur adipiscing', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam obcaecati ex natus nulla rem sequi laborum quod fugit',
-        author: 'William Halsted', photoPath: 'https://news.microsoft.com/wp-content/uploads/prod/sites/46/2021/03/HLS19_healthcare2Hologram_001-1600x1067.jpg',
-        date: 'Jan 29, 2018', link: "https://zaxid.net/meditsina_tag50837/"
-    },
-    {
-        id: 2, title: 'Lorem ipsum dolor sit amet, consectetur adipiscing', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam obcaecati ex natus nulla rem sequi laborum quod fugit',
-        author: 'William Halsted', photoPath: 'https://medvestnik.by/images/images_category/Personalizaciya-mediciny.webp',
-        date: 'Jan 29, 2018', link: "https://zaxid.net/meditsina_tag50837/"
-    },
-    {
-        id: 3, title: 'Lorem ipsum dolor sit amet, consectetur adipiscing', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam obcaecati ex natus nulla rem sequi laborum quod fugit',
-        author: 'William Halsted', photoPath: 'https://jnj.ru/wp-content/uploads/2018/04/Depositphotos_65281749_m-2015_833_512.jpg',
-        date: 'Jan 29, 2018', link: "https://zaxid.net/meditsina_tag50837/"
-    },
-    {
-        id: 4, title: 'Lorem ipsum dolor sit amet, consectetur adipiscing', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam obcaecati ex natus nulla rem sequi laborum quod fugit',
-        author: 'William Halsted', photoPath: 'https://news.microsoft.com/wp-content/uploads/prod/sites/46/2021/03/DTHC-hero-1600x1063.jpg',
-        date: 'Jan 29, 2018', link: "https://zaxid.net/meditsina_tag50837/"
-    },
-    {
-        id: 5, title: 'Lorem ipsum dolor sit amet, consectetur adipiscing', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam obcaecati ex natus nulla rem sequi laborum quod fugit',
-        author: 'William Halsted', photoPath: 'https://antiage-expert.com/upload/medialibrary/3d5/3d51794b6c72a9c33d774bb87d6861f5.jpg',
-        date: 'Jan 29, 2018', link: "https://zaxid.net/meditsina_tag50837/"
-    }
-]
-
-
+import { useTypedSelector } from '../hooks/storeHooks';
+import { useEffect, useRef } from 'react';
+// import { setNews } from '../store/slices/news';
+import { apiRequest } from '../store/query';
 
 export default function News() {
 
-    const { headerRef } = useGlobalRefs();
+    const apiCallStartTimeRef = useRef(0);
 
-    const scrollToHeader = () => {
-        if (headerRef.current) {
-            headerRef.current.scrollIntoView({ behavior: 'smooth' }); 
-        }
-    };
+    useEffect(() => {
+        apiCallStartTimeRef.current = Date.now();
 
-    const [news] = useState<News[]>(defaulNewstValues);
+        const fetchData = async () => {
+            try {
+                await apiRequest("news/news/");
+                
+                const apiCallEndTime = Date.now();
+                const apiCallDuration = apiCallEndTime - apiCallStartTimeRef.current;
+
+                console.log(`API виклик зайняв ${apiCallDuration} мс`);
+            } catch (error) {
+                console.error('Помилка під час виклику API:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const { data } = useTypedSelector((state) => state.news);
 
 
     return (
         <>
             <div className="bg-gray-100 flex flex-wrap justify-between p-10 dark:bg-neutral-900">
-                {news.map(n =>
-                    <NewsCard key={n.id} title={n.title} description={n.description} author={n.author} photoPath={n.photoPath} date={n.date} link={n.link} />
+                {data.map(n =>
+                    <NewsCard key={n.id} data={n} />
                 )}
-                {news.map(n =>
-                    <NewsCard key={n.id} title={n.title} description={n.description} author={n.author} photoPath={n.photoPath} date={n.date} link={n.link} />
-                )} {/* тимчасово додано ще відображення новин для збільшення обсягу новин, щоб протестувати використання UseRef */}
-            </div>
-            <div onClick={scrollToHeader} >
-                До верху
             </div>
         </>
     )
