@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'authentication',
     'news',
-    'user_card'
+    'user_card',
+    'medical_tools',
 ]
 
 MIDDLEWARE = [

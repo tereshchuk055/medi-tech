@@ -32,8 +32,11 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('first name'), max_length=30)
     last_name = models.CharField(_('last name'), max_length=30)
     user_birthdate = models.DateField(_('user_birthdate'))
-    user_sex = models.CharField(max_length=10, choices=[(
-        'male', 'Male'), ('female', 'Female')])
+    user_sex = models.CharField(max_length=10,
+                                choices=[
+                                    ('male', 'Male'),
+                                    ('female', 'Female')
+                                ])
     user_phone = models.CharField(max_length=50)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     last_login = models.DateTimeField(null=True, blank=True)
