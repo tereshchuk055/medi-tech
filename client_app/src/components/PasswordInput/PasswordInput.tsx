@@ -8,19 +8,21 @@ type PasswordInputType = {
 }
 
 
-export default function PasswordInput({ name, value, onChange }: PasswordInputType) {
+export default function PasswordInput({ name, value, onChange, register }: PasswordInputType) {
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
 
     return (
         <div className="relative items-center">
             <input type={showPassword ? 'text' : 'password'}
-                x-model="password"
+                // x-model="password"
                 name={name}
                 value={value}
                 onChange={onChange}
                 placeholder="***************"
-                className="w-full  mb-[-5px] shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300 hover:bg-gray-200 focus:bg-gray-100 focus:ring-0 " />
+                className="w-full  mb-[-5px] shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300 hover:bg-gray-200 focus:bg-gray-100 focus:ring-0 "
+                {...register}
+            />
             <div className="absolute inline-block mt-3 right-5"
                 onClick={() => { setShowPassword(!showPassword) }} >
                 {

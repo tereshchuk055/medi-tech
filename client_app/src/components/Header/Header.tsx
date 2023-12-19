@@ -1,11 +1,13 @@
-import { useState } from 'react';
 import Logo from '../Logo/Logo';
 import Switcher from '../Switcher/Switcher';
+import { useAppDispatch, useTypedSelector } from '../../hooks/storeHooks';
+import { setAuth } from "../../store/slices/auth";
+
 
 
 export default function Header() {
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
-
+    const dispatch = useAppDispatch()
+    const { isAuth } = useTypedSelector(state => state.auth)
     return (
         <header className="dark:bg-neutral-900 pr-5  xl:border-b border-gray-200 border-opacity-75 border-gray-100 w-full ">
             <nav>
@@ -20,10 +22,10 @@ export default function Header() {
                         </div>
                         <div className="flex space-x-4 items-center">
                             <Switcher />
-                            {isUserLoggedIn ? (
+                            {isAuth ? (
                                 <>
                                     <li><button className="bg-sky-500 rounded-xl py-2 px-4 font-bold text-sky-100"><a href="/Profile">Profile</a></button></li>
-                                    <li><button className="bg-lime-500 rounded-xl py-2 px-4 font-bold text-sky-100" onClick={() => setIsUserLoggedIn(false)}>Log Out</button></li>
+                                    <li><button className="bg-lime-500 rounded-xl py-2 px-4 font-bold text-sky-100" onClick={() => dispatch(setAuth(false))}>Log Out</button></li>
                                 </>
                             ) : (
                                 <>
@@ -31,7 +33,7 @@ export default function Header() {
                                     <li><button className="bg-lime-500 rounded-xl py-2 px-4 font-bold text-sky-100"><a href="/SignIn">Sign In</a></button></li>
                                 </>
                             )}
-                            
+
                         </div>
                     </div>
                 </ul>

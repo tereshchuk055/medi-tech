@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Switcher from "../Switcher/Switcher";
+import { useNavigate } from "react-router";
 
 
 export type FormStepType = {
@@ -22,7 +23,7 @@ export enum UserSex {
 export type UserDataInputs = {
   firstName: string;
   lastName: string;
-  birthDate: Date;
+  birthDate: string;
   gender: UserSex;
   phoneNumber: string;
 };
@@ -31,7 +32,7 @@ export type CredentialsInputs = {
   email: string;
   password: string;
   repeatPassword: string;
-  verificationCode ?: string;
+  verificationCode?: string;
 };
 
 export type FormInputs = UserDataInputs | CredentialsInputs;
@@ -40,10 +41,7 @@ const schema: yup.ObjectSchema<UserDataInputs | CredentialsInputs>[] = [
   yup.object().shape({
     firstName: yup.string().required("Enter your first name!"),
     lastName: yup.string().required("Enter your last name!"),
-    birthDate: yup
-      .date()
-      .max(new Date(), "Birth date can't be in the future")
-      .required("Select your birth date!"),
+    birthDate: yup.string().required("Select your birth date!"),
     gender: yup.mixed<UserSex>().required("Select your gender!"),
     phoneNumber: yup.string().matches(/^\+380\d{9}$/, "Enter a valid phone number").required("Enter your phone number!"),
   }),
@@ -64,6 +62,13 @@ const schema: yup.ObjectSchema<UserDataInputs | CredentialsInputs>[] = [
   }),]
 
 export default function RegisterForm() {
+
+  const navigate = useNavigate();
+
+  const handleRedirect = () => {
+    navigate('/signIn');
+  };
+
   const [currStep, setCurrStep] = useState(1)
 
   const {
@@ -89,7 +94,9 @@ export default function RegisterForm() {
           register={register}
           errors={errors} />
         <Button text="Register"
-          type="submit" />
+          type="submit"
+          onClick={handleRedirect}
+        />
       </>
     }
     return steps[currStep]

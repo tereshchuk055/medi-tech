@@ -24,4 +24,3 @@ export interface News {
     date: string,
     link: string
 }
-

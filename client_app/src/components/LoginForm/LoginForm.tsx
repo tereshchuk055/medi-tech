@@ -6,6 +6,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import ShowErrorMessage from "../ShowErrorMessage/ShowErrorMessage";
+import { useEffect } from "react";
+import { setAuth } from "../../store/slices/auth";
+import { useAppDispatch } from "../../hooks/storeHooks";
 
 interface FormInputs {
     login: string,
@@ -14,11 +17,15 @@ interface FormInputs {
 
 const schema = yup.object().shape({
     login: yup.string().required("Login required"),
-    password: yup.string().required('Password required')
+    password: yup.string().required("Password required")
 });
 
 
+
+
 export default function LoginForm() {
+    const dispatch = useAppDispatch()
+
     const {
         register,
         handleSubmit,
@@ -26,8 +33,10 @@ export default function LoginForm() {
     } = useForm<FormInputs>({ resolver: yupResolver(schema) });
 
     const onSubmit = (data: FormInputs) => {
+        dispatch(setAuth(true));
         console.log(data);
     };
+
 
     return (
         <div className="pt-7 dark:bg-gray-900 ">
@@ -62,20 +71,19 @@ export default function LoginForm() {
                                             </label>
                                         </div>
                                         <div className="text-center sm:text-right">
-                                            <a href="#" className="text-indigo-600 font-medium text-sm duration-200 transition-colors hover:text-indigo-800 dark:text-indigo-300">Forgot
-                                                your password?</a>
+                                            <a href="/signUp" className="text-indigo-600 font-medium text-sm duration-200 transition-colors hover:text-indigo-800 dark:text-indigo-300">Don`t have account?</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="mb-2">
-                                    <AuthorizationButton type="submit" />
+                                    <AuthorizationButton type="submit"  />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
-            
+
         </div>
     );
 }
