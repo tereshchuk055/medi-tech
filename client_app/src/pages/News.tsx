@@ -1,5 +1,4 @@
 
-import { useGlobalRefs } from '../components/Layout/RefContext';
 import NewsCard from '../components/NewsCard/NewsCard';
 import { useTypedSelector } from '../hooks/storeHooks';
 import { useEffect, useRef } from 'react';
