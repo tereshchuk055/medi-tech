@@ -13,4 +13,3 @@ export default function useDarkSide(): [string, Dispatch<SetStateAction<string>>
 
     return [colorTheme, setTheme];
 }
-

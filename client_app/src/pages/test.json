@@ -1,0 +1,50 @@
+[
+    {
+        "id": 0,
+        "permission": 0,
+        "email": "sofia@gmail.com",
+        "firstName": "Sofia",
+        "lastName": "Horai",
+        "age": 19,
+        "position": "Терапевт",
+        "link": "https://img.freepik.com/free-photo/doctor-holding-clipboard-looking-at-camera_23-2148285743.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1698105600&semt=ais",
+        "degree": "MD",
+        "address": "123 Main St, City",
+        "appointments": "Monday, Wednesday, Friday",
+        "workExperience": 3,
+        "phoneNumber": "+1234567890",
+        "about": "I am a passionate and dedicated therapist with a focus on holistic health."
+    },
+    {
+        "id": 1,
+        "permission": 0,
+        "email": "sofia@gmail.com",
+        "firstName": "Masha",
+        "lastName": "Horai",
+        "age": 19,
+        "position": "Терапевт",
+        "link": "https://img.freepik.com/free-photo/doctor-holding-clipboard-looking-at-camera_23-2148285743.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1698105600&semt=ais",
+        "degree": "MD",
+        "address": "123 Main St, City",
+        "appointments": "Monday, Wednesday, Friday",
+        "workExperience": 3,
+        "phoneNumber": "+1234567890",
+        "about": "I am a passionate and dedicated therapist with a focus on holistic health."
+    },
+    {
+        "id": 1,
+        "permission": 0,
+        "email": "sofia@gmail.com",
+        "firstName": "Kate",
+        "lastName": "Horai",
+        "age": 19,
+        "position": "Терапевт",
+        "link": "https://img.freepik.com/free-photo/doctor-holding-clipboard-looking-at-camera_23-2148285743.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1698105600&semt=ais",
+        "degree": "MD",
+        "address": "123 Main St, City",
+        "appointments": "Monday, Wednesday, Friday",
+        "workExperience": 3,
+        "phoneNumber": "+1234567890",
+        "about": "I am a passionate and dedicated therapist with a focus on holistic health."
+    }
+]
