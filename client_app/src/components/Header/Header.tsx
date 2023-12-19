@@ -15,8 +15,18 @@ export default function Header() {
                     <div className="container flex items-center justify-between p-2">
                         <div> <Logo /></div>
                         <div className="text-gray-900 flex space-x-12 items-center text-lg dark:text-sky-100 ">
-                            <li><a href="#">Головна</a></li>
-                            <li><a href="#" >Про нас</a></li>
+                            <li><a href="/">Головна</a></li>
+                            {isAuth ? (
+                                <>
+                                    <li><a href="/Apointment" >Записи до лікаря</a></li>
+                                    <li><a href="/Conclusion" >Медичні висновки</a></li>
+
+                                </>
+                            ) : (
+                                <>
+                                    <li><a href="#" >Про нас</a></li>
+                                </>
+                            )}
                             <li><a href="/Employees">Співробітники</a></li>
                             <li><a href="/News">Новини</a></li>
                         </div>
