@@ -8,7 +8,8 @@ import News from './News';
 import RootLayout from '../components/Layout/Layout';
 import Employees from './Employees';
 import { useTypedSelector } from '../hooks/storeHooks';
-// import Profile from './Profile';
+import Profile from './Profile';
+
 
 export const AppRoutes = () => {
     const state = useTypedSelector((state) => state.auth);
@@ -22,7 +23,7 @@ export const AppRoutes = () => {
                         <Route path="/addTreat" element={<TreatmentForm />} />
                         <Route path="/news" element={<News />} />
                         <Route path="/employees" element={<Employees />} />
-                        {/* <Route path="/profile" element={<Profile />} /> */}
+                        <Route path="/profile" element={<Profile />} />
                         <Route path="/signIn" element={<Navigate to="/" />} />
                         <Route path="/signUp" element={<Navigate to="/" />} />
                         <Route path="*" element={<NotFound />} />
