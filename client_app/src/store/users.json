@@ -18,9 +18,7 @@
         "position": "string",
         "degree": "string",
         "workExperience": 2,
-        "about": "string",
-        "times": ["string", "s"],
-        "appointments": "string"
+        "about": "string"
     },
     {
         "id": 12,
@@ -41,8 +39,6 @@
         "position": "string",
         "degree": "string",
         "workExperience": 2,
-        "about": "string",
-        "times": ["string", "s"],
-        "appointments": "string"
+        "about": "string"
     }
 ]

@@ -17,7 +17,6 @@ const userData: User = {
     lastName: "User",
     age: 19,
     link: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fru.freepik.com%2Ffree-photos-vectors%2F%25D1%2587%25D0%25B5%25D0%25BB%25D0%25BE%25D0%25B2%25D0%25B5%25D0%25BA&psig=AOvVaw1oAIuDt0hCagYjxNZkaZHc&ust=1703279044485000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKjDg4W3oYMDFQAAAAAdAAAAABAE",
-    address: "123 Main St, City",
     phoneNumber: "+1234567890"
 }
 
