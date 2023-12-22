@@ -15,20 +15,20 @@ export default function Header() {
                     <div className="container flex items-center justify-between p-2">
                         <div> <Logo /></div>
                         <div className="text-gray-900 flex space-x-12 items-center text-lg dark:text-sky-100 ">
-                            <li><a href="/">Головна</a></li>
+                            <li><a href="/">Home</a></li>
                             {isAuth ? (
                                 <>
-                                    <li><a href="/Appointment" >Записи до лікаря</a></li>
-                                    <li><a href="/Conclusion" >Медичні висновки</a></li>
+                                    <li><a href="/Appointment" >Doctor's appointments</a></li>
+                                 
 
                                 </>
                             ) : (
                                 <>
-                                    <li><a href="#" >Про нас</a></li>
+                                    <li><a href="#" >About usс</a></li>
                                 </>
                             )}
-                            <li><a href="/Employees">Співробітники</a></li>
-                            <li><a href="/News">Новини</a></li>
+                            <li><a href="/Employees">Employees</a></li>
+                            <li><a href="/News">News</a></li>
                         </div>
                         <div className="flex space-x-4 items-center">
                             <Switcher />
