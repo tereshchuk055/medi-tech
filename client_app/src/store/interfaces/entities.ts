@@ -3,16 +3,20 @@ export interface User {
     firstName: string,
     lastName: string,
     email: string,
-    permission: number
-    age: number;
-    position: string
-    link: string;
-    degree: string,
+    permission: number,
+    age: number,
+    link: string,
+    phoneNumber: string
     address: string,
-    appointments: string,
+}
+
+export interface Doctor extends User {
+    position: string
+    degree: string,
     workExperience: number,
-    phoneNumber: string,
     about: string,
+    times: string[],
+    appointments: string
 }
 
 export interface News {
@@ -22,5 +26,13 @@ export interface News {
     author: string,
     photoUrl: string,
     date: string,
+    link: string
+}
+
+export interface Appoitment {
+    id: number | null,
+    id_patient: number,
+    id_doctor: number,
+    time: string,
     link: string
 }

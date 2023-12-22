@@ -8,6 +8,8 @@ import News from './News';
 import RootLayout from '../components/Layout/Layout';
 import Employees from './Employees';
 import { useTypedSelector } from '../hooks/storeHooks';
+import ProfileCard from '../components/Cards/ProfileCard';
+import Appoitment from './Appoitment';
 // import Profile from './Profile';
 
 export const AppRoutes = () => {
@@ -22,7 +24,8 @@ export const AppRoutes = () => {
                         <Route path="/addTreat" element={<TreatmentForm />} />
                         <Route path="/news" element={<News />} />
                         <Route path="/employees" element={<Employees />} />
-                        {/* <Route path="/profile" element={<Profile />} /> */}
+                        <Route path="/appointment" element={<Appoitment />} />
+                        <Route path="/profile" element={<ProfileCard />} />
                         <Route path="/signIn" element={<Navigate to="/" />} />
                         <Route path="/signUp" element={<Navigate to="/" />} />
                         <Route path="*" element={<NotFound />} />

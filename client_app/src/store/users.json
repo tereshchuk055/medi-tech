@@ -1,0 +1,24 @@
+[
+    {
+        "id": 11,
+        "permission": 0,
+        "email": "vasyauser@gmail.com",
+        "firstName": "Vasya",
+        "lastName": "User",
+        "age": 19,
+        "link": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fru.freepik.com%2Ffree-photos-vectors%2F%25D1%2587%25D0%25B5%25D0%25BB%25D0%25BE%25D0%25B2%25D0%25B5%25D0%25BA&psig=AOvVaw1oAIuDt0hCagYjxNZkaZHc&ust=1703279044485000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKjDg4W3oYMDFQAAAAAdAAAAABAE",
+        "address": "123 Main St, City",
+        "phoneNumber": "+1234567890"
+    },
+    {
+        "id": 12,
+        "permission": 0,
+        "email": "petyauser@gmail.com",
+        "firstName": "Pety",
+        "lastName": "User",
+        "age": 19,
+        "link": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fru.dreamstime.com%2F%25D0%25BF%25D0%25BE%25D1%2580%25D1%2582%25D1%2580%25D0%25B5%25D1%2582-%25D1%2581%25D1%2580%25D0%25B5%25D0%25B4%25D0%25BD%25D0%25B5%25D0%25B3%25D0%25BE-%25D0%25B2%25D0%25B7%25D1%2580%25D0%25BE%25D1%2581%25D0%25BB%25D0%25BE%25D0%25B3%25D0%25BE-%25D1%2587%25D0%25B5%25D0%25BB%25D0%25BE%25D0%25B2%25D0%25B5%25D0%25BA%25D0%25B0-%25D0%25BD%25D0%25B0-%25D1%2584%25D0%25BE%25D0%25BD%25D0%25B5-%25D0%25BE%25D0%25B1%25D1%258B%25D1%2587%25D0%25BD%25D0%25BE%25D0%25B3%25D0%25BE-%25D1%2584%25D0%25BE%25D0%25BD%25D0%25B0-%25D1%2581%25D1%2582%25D1%2583%25D0%25B4%25D0%25B8%25D0%25B9%25D0%25BD%25D1%258B%25D0%25B9-image160029790&psig=AOvVaw1oAIuDt0hCagYjxNZkaZHc&ust=1703279044485000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKjDg4W3oYMDFQAAAAAdAAAAABAJ",
+        "address": "123 Main St, City",
+        "phoneNumber": "+1234567890"
+    }
+]

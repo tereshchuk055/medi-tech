@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { news } from './slices/news'
-import { employees } from './slices/employees'
+import { users } from './slices/users'
 import { auth } from './slices/auth'
+import { appointments } from './slices/appoitment'
 
 const rootReducer = combineReducers({
     news: news,
-    employees: employees,
+    users: users,
     auth: auth,
+    appoitments: appointments
 })
 
 export const store = configureStore({

@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer";
 import { RefProvider } from "./RefContext";
 
 export default function RootLayout() {
+
     return (<>
         <Header />
         <div className="flex flex-col min-h-screen">

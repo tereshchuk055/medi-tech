@@ -9,7 +9,7 @@ export default function Header() {
     const dispatch = useAppDispatch()
     const { isAuth } = useTypedSelector(state => state.auth)
     return (
-        <header ref={headerRef} className="dark:bg-neutral-900 pr-5  xl:border-b border-gray-200 border-opacity-75 border-gray-100 w-full ">
+        <header  className="dark:bg-neutral-900 pr-5  xl:border-b border-gray-200 border-opacity-75 border-gray-100 w-full ">
             <nav>
                 <ul className="flex space-x-4 items-center">
                     <div className="container flex items-center justify-between p-2">
@@ -18,7 +18,7 @@ export default function Header() {
                             <li><a href="/">Головна</a></li>
                             {isAuth ? (
                                 <>
-                                    <li><a href="/Apointment" >Записи до лікаря</a></li>
+                                    <li><a href="/Appointment" >Записи до лікаря</a></li>
                                     <li><a href="/Conclusion" >Медичні висновки</a></li>
 
                                 </>
