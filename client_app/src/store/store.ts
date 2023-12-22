@@ -3,12 +3,16 @@ import { news } from './slices/news'
 import { users } from './slices/users'
 import { auth } from './slices/auth'
 import { appointments } from './slices/appoitment'
+import { patientss } from './slices/profile'
+
+
 
 const rootReducer = combineReducers({
     news: news,
     users: users,
     auth: auth,
-    appoitments: appointments
+    appoitments: appointments,
+    patients: patientss
 })
 
 export const store = configureStore({

@@ -6,8 +6,8 @@ export interface User {
     permission: number,
     age: number,
     link: string,
-    phoneNumber: string
-    address: string,
+    phoneNumber: string,
+
 }
 
 export interface Doctor extends User {
@@ -35,4 +35,14 @@ export interface Appoitment {
     id_doctor: number,
     time: string,
     link: string
+}
+
+export interface Patient extends User {
+    gender: string,
+    address: string,
+    height: number,
+    weight: number,
+    chronicConditions: string,
+    allergies: string,
+    vaccinations: string
 }
