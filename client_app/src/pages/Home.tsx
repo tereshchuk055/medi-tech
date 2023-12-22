@@ -1,7 +1,7 @@
 export const Home = () => {
     return (
         <>
-            <section className="bg-cover bg-center bg-gray-200 py-16" style={{ backgroundImage: 'url("https://img.freepik.com/premium-vector/abstract-medical-background-with-health-icons-and-symbols-template-design-with-concept-and-idea-for-healthcare-technology-innovation-medicine-health-science-and-research_181182-15870.jpg")' }}>
+            <section className="bg-cover bg-center bg-gray-200 py-16 " style={{ backgroundImage: 'url("https://img.freepik.com/premium-vector/abstract-medical-background-with-health-icons-and-symbols-template-design-with-concept-and-idea-for-healthcare-technology-innovation-medicine-health-science-and-research_181182-15870.jpg")' }}>
                 <div className="container mx-auto text-center text-gray-800">
                     <h1 className="text-4xl font-bold mb-4 leading-tight">Revolutionizing Healthcare Through Innovation</h1>
                     <p className="text-lg leading-loose mb-8">Discover a new era of health management with our advanced health app. Empowering you to take control of your well-being.</p>
@@ -25,11 +25,6 @@ export const Home = () => {
                     <a href="/appointment" className="bg-blue-500 text-white px-8 py-3 rounded-full mt-12 hover:bg-blue-700 transition duration-300">Записатись до лікаря</a>
                 </div>
             </section>
-
-
-
-
-
 
             <section className="bg-white py-16">
                 <div className="container mx-auto text-center">

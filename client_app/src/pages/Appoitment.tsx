@@ -14,13 +14,13 @@ export default function Appoitment() {
 
 
     return (
-        <>
-            <div className="flex justify-center p-10 w-80">
+        <><div className="dark:bg-neutral-900 h-screen">
+            <div className="ml-20 flex justify-center p-10 w-80 dark:bg-neutral-900">
                 <Button onClick={() => setIsModalOpen(true)} text="Create Appointment" />
             </div>
 
 
-            <div className="bg-gray-100 flex flex-wrap justify-around    p-10 dark:bg-neutral-900">
+            <div className="bg-gray-100 flex flex-wrap justify-around  p-10 dark:bg-neutral-900">
                 {[...appointments.filter(a => a.id_patient == user?.id)].map(n =>
                     <AppoitmentCard key={n.id} appointment={n} />
                 )}
@@ -28,6 +28,7 @@ export default function Appoitment() {
             {isModalOpen && (<Suspense fallback={<div>Loading...</div>}>
                 <AppointmentModal setIsModalOpen={setIsModalOpen} children={[]} />
             </Suspense>)}
+            </div>
         </>
     )
 }

@@ -44,5 +44,6 @@ export interface Patient extends User {
     weight: number,
     chronicConditions: string,
     allergies: string,
+    about: string,
     vaccinations: string
 }
